@@ -1,0 +1,47 @@
+name: CI - Okta SSO Agent
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHONPATH: ${{ github.workspace }}/scripts
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: 🧼 Lint with flake8
+        run: |
+          flake8 scripts/ --count --select=E9,F63,F7,F82 --show-source --statistics
+
+      - name: 🌍 Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: ✅ Terraform init & validate
+        working-directory: terraform/
+        run: |
+          terraform init -backend=false
+          terraform validate
+
+      - name: 🧪 Run agent scan
+        run: |
+          echo "Loading .env..."
+          export $(grep -v '^#' .env | xargs)
+          python scripts/agent.py --scan || echo "Scan test (non-blocking)"
