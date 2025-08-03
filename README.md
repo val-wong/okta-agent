@@ -67,9 +67,9 @@ Your pipeline runs:
 
 ### 📺 Related Videos
 
-* 🎥 [Part 1: Scanning + Terraform Generator](#)
-* 🎥 [Part 2: Building the CLI Agent](#)
-* 🎥 [Part 3: CI/CD with GitHub Actions](#)
+* 🎥 [Part 1: Scanning + Terraform Generator](https://youtu.be/c6xOGk9-rQk?si=z8kq4gcxdFAaRiMc)
+* 🎥 [Part 2: Building the CLI Agent](https://youtu.be/oD3L3f51hCg?si=gp_Ex8JZt5-Dj2jw)
+* 🎥 [Part 3: CI/CD with GitHub Actions](https://youtu.be/HvNNpTtVjPY)
 
 ---
 
@@ -85,4 +85,4 @@ Feel free to fork and PR improvements, especially:
 
 ### 🔗 Connect
 
-Made by [Valentin Wong](https://www.linkedin.com/in/valentinwong/)
+Made by [Valentin Wong](https://www.linkedin.com/in/valentin-w-2a04bb261)
