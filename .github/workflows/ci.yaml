@@ -45,3 +45,5 @@ jobs:
           echo "Loading .env..."
           export $(grep -v '^#' .env | xargs)
           python scripts/agent.py --scan || echo "Scan test (non-blocking)"
+
+# You can tweak it to skip certain steps — but this should be a solid baseline
