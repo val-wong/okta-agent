@@ -41,12 +41,13 @@ resource "okta_app_group_assignment" "zoom_assignment" {{
 """
 
 def generate_zoom_tf(okta_sso_url, group_id):
-    output_path = Path("../terraform/generated/zoom_saml_scim.tf")
+    output_path = Path(__file__).resolve().parent.parent / "terraform" / "generated" / "zoom_saml.tf"
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, "w") as f:
         f.write(ZOOM_TF_TEMPLATE.format(okta_sso_url=okta_sso_url, group_id=group_id))
 
+    print(f"🧭 Absolute path: {output_path.resolve()}")
     print(f"✅ Terraform config written to {output_path}")
 
 if __name__ == "__main__":

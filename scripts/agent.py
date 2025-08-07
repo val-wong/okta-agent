@@ -17,6 +17,19 @@ def run_generate(url, group):
         "--group", group
     ], check=True)
 
+def generate_tf_config(url: str, group: str) -> str:
+    result = subprocess.run(
+        ["python", str(SCRIPT_DIR / "generate_tf.py"), "--url", url, "--group", group],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr)
+
+    return result.stdout
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Okta SSO Automation CLI")
     parser.add_argument("--scan", action="store_true", help="Scan Okta apps for SAML/SCIM")
